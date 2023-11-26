@@ -55,17 +55,73 @@ The data model is implemented using Sequelize and assumes the usage of a relatio
 
 - Please refer to the Swagger documentation for detailed information on each endpoint.
 
-## Issues and Assumptions
-
-- Refer to the [Issues](#) section for known issues and potential improvements.
-
-- [Assumptions Document](#) provides information about assumptions made during the development process.
-
-## Video Presentation
-
-A short video presenting the project can be found [here](#).
-
 Feel free to explore the code, contribute, and provide feedback. Thank you for checking out this Airline API project!
 
 ## Communication
 For communication: reach out to atakandogan.info@gmail.com or [LinkedIn](https://www.linkedin.com/in/atakandoan/) 
+
+********************************************************************************************************************************************************
+
+# Havayolu API Projesi
+
+Bu depo, hayali bir havayolu şirketi için geliştirilen bir API projesinin kaynak kodlarını içerir. Proje, müşterilerin havayolu şirketi ile bilet işlemleri gerçekleştirmelerini sağlayan web hizmetlerini sunar.
+
+## Proje Genel Bakış
+
+API projesi aşağıdaki özellikleri içerir:
+
+- **Bilet Sorgula:** Müşteriler, tarih, kalkış yeri, varış yeri ve kişi sayısına göre uygun uçuşları sorgulayabilirler.
+
+- **Bilet Satın Al:** Müşteriler, tarih, kalkış yeri, varış yeri, yolcu adı ve kişi sayısı kullanarak bilet satın alma işlemi gerçekleştirebilirler.
+
+## Kullanılan Teknolojiler
+
+- **Node.js ve Express:** Sunucu, Node.js ve Express çerçevesi kullanılarak oluşturulmuştur.
+
+- **Swagger:** Swagger, API belgelerini sağlamak için entegre edilmiştir. Swagger UI'ye `/api-docs` yolundan erişebilirsiniz.
+
+- **Sequelize:** Sequelize, veritabanı ile etkileşim için kullanılan ORM (Object-Relational Mapping) aracıdır.
+
+- **JWT (JSON Web Token):** Kimlik doğrulama, JWT kullanılarak uygulanmıştır. Müşterilerin yetkili uç noktalarda geçerli bir JWT tokenını istek başlığında bulundurmaları gerekmektedir.
+
+- **Bcrypt:** Şifreler, veritabanına saklanmadan önce güvenli bir şekilde Bcrypt kullanılarak karmaşalandırılır.
+
+## Geliştirme Ortamı
+
+Proje, Node.js çalışma zamanı kullanılarak geliştirilmiştir ve Node.js yüklü olan herhangi bir makinede yerel olarak çalıştırılabilir. Gerekli çevresel değişkenleri, sağlanan `.env.example` dosyasına dayalı olarak bir `.env` dosyası oluşturarak ayarlamayı unutmayın.
+
+## Veritabanı
+
+Veri modeli Sequelize kullanılarak uygulanmış olup, ilişkisel bir veritabanının kullanımını varsayar. Şu anda, kod, herhangi bir bulut sağlayıcısından gelen bir veritabanı hizmetiyle çalışmak üzere yapılandırılmış durumda, tercihen Azure.
+
+## Nasıl Çalıştırılır
+
+1. Bağımlılıkları yükleyin: `npm install`
+2. Veritabanı bağlantısını ve çevresel değişkenleri içeren bir `.env` dosyası oluşturun.
+3. Sunucuyu çalıştırın: `npm start`
+4. API'ye `http://localhost:3000` adresinden erişin
+
+## Endpointler
+
+- **GET `/`:** API hakkında hoş geldiniz mesajı ve bilgi sağlayan kök uç nokta.
+
+- **POST `/login`:** Kullanıcı kimliği doğrulama için uç nokta. Geçerli bir kullanıcı adı ve şifre gerektirir.
+
+- **POST `/register`:** Kullanıcı kaydı için uç nokta. Yeni bir kullanıcı hesabı oluşturur.
+
+- **POST `/query-ticket`:** Belirtilen kriterlere göre uygun uçuşları sorgulamak için uç nokta.
+
+- **POST `/buy-ticket`:** Bilet satın alma için uç nokta. Kimlik doğrulama gerektirir ve başarılı işlem sonrasında kullanılabilir koltukları düşer.
+
+## Ek Notlar
+
+- Proje, stil için SCSS kullanarak temel bir ön uç öğesi içerir. Hoş geldiniz mesajına erişmek için kök URL'yi ziyaret edin.
+
+- Lütfen her uç nokta hakkında detaylı bilgi için Swagger belgelerine başvurun.
+
+
+## İletişim
+İletişim için: atakandogan.info@gmail.com veya [LinkedIn](https://www.linkedin.com/in/atakandoan/) adresinden ulaşabilirsiniz.
+
+Proje hakkında keşfe çıkın, katkıda bulunun ve geri bildirim sağlayın. Bu Havayolu API projesini incelediğiniz için teşekkür ederiz!
+
