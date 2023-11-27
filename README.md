@@ -88,6 +88,13 @@ The schema for the "Flights" table includes the following fields:
 
 ![Flights Table Schema](https://github.com/atakandgn/AirlineSystemApi/assets/108396649/bec2f059-00a6-4679-95a8-3230ae8fa7ac)
 
+
+## ER Diagram
+
+Below is the Entity-Relationship (ER) diagram representing the database schema of the Airline API project:
+
+![ER Diagram](https://github.com/atakandgn/AirlineSystemApi/assets/108396649/023353c8-d66e-4f22-bb2d-c07310db9c32)
+
 Feel free to explore the code, contribute, and provide feedback. Thank you for checking out this Airline API project!
 
 ## Communication
@@ -184,6 +191,13 @@ Canlı proje [RENDER](https://render.com/) üzerinde dağıtılmıştır. [Burad
 - **`seat_capacity`:** Uçuşun toplam koltuk kapasitesi.
 
 ![Flights Tablosu Şeması](https://github.com/atakandgn/AirlineSystemApi/assets/108396649/bec2f059-00a6-4679-95a8-3230ae8fa7ac)
+
+## ER Diyagramı
+
+Aşağıda, Havayolu API projesinin veritabanı şemasını temsil eden Varlık-İlişki (ER) diyagramı bulunmaktadır:
+
+![ER Diyagramı](https://github.com/atakandgn/AirlineSystemApi/assets/108396649/023353c8-d66e-4f22-bb2d-c07310db9c32)
+
 
 Kodu keşfetmek, katkıda bulunmak ve geri bildirimde bulunmak için özgürsünüz. Bu Havayolu API projesini incelediğiniz için teşekkür ederiz!
 
