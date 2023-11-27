@@ -93,7 +93,7 @@ Feel free to explore the code, contribute, and provide feedback. Thank you for c
 ## Communication
 For communication: reach out to atakandogan.info@gmail.com or [LinkedIn](https://www.linkedin.com/in/atakandoan/)
 
-********************************************************************************************************************************************************
+***************************************************************************************************************************************************************************************
 
 # Havayolu API Projesi
 
@@ -170,7 +170,7 @@ Canlı proje [RENDER](https://render.com/) üzerinde dağıtılmıştır. [Burad
 - **`phone`:** Müşteri hesabı ile ilişkilendirilmiş telefon numarası.
 - **`password`:** Müşteri hesabı için hashlenmiş şifre.
 
-![Clients Tablo Şeması](<insert link to clients table schema image>)
+![Clients Tablosu Şeması](https://github.com/atakandgn/AirlineSystemApi/assets/108396649/d5949f36-85a1-4cc1-85fb-8af6f45b673d)
 
 ### Flights
 
@@ -183,7 +183,7 @@ Canlı proje [RENDER](https://render.com/) üzerinde dağıtılmıştır. [Burad
 - **`price`:** Uçuşun fiyatı.
 - **`seat_capacity`:** Uçuşun toplam koltuk kapasitesi.
 
-![Flights Tablo Şeması](<insert link to flights table schema image>)
+![Flights Tablosu Şeması](https://github.com/atakandgn/AirlineSystemApi/assets/108396649/bec2f059-00a6-4679-95a8-3230ae8fa7ac)
 
 Kodu keşfetmek, katkıda bulunmak ve geri bildirimde bulunmak için özgürsünüz. Bu Havayolu API projesini incelediğiniz için teşekkür ederiz!
 
