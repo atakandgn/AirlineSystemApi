@@ -91,7 +91,7 @@ The schema for the "Flights" table includes the following fields:
 
 ## ER Diagram
 
-Below is the Entity-Relationship (ER) diagram representing the database schema of the Airline API project:
+Below is the Entity-Relationship (ER) diagram representing the Airline System API project:
 
 ![ER Diagram](https://github.com/atakandgn/AirlineSystemApi/assets/108396649/023353c8-d66e-4f22-bb2d-c07310db9c32)
 
@@ -194,7 +194,7 @@ Canlı proje [RENDER](https://render.com/) üzerinde dağıtılmıştır. [Burad
 
 ## ER Diyagramı
 
-Aşağıda, Havayolu API projesinin veritabanı şemasını temsil eden Varlık-İlişki (ER) diyagramı bulunmaktadır:
+Aşağıda, Havayolu API projesini temsil eden Varlık-İlişki (ER) diyagramı bulunmaktadır:
 
 ![ER Diyagramı](https://github.com/atakandgn/AirlineSystemApi/assets/108396649/023353c8-d66e-4f22-bb2d-c07310db9c32)
 
