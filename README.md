@@ -73,7 +73,7 @@ The schema for the "Clients" table includes the following fields:
 - **`phone`:** The phone number associated with the client account.
 - **`password`:** The hashed password for the client account.
 
-![Clients Table Schema](<insert link to clients table schema image>)
+![Clients Table Schema](https://github.com/atakandgn/AirlineSystemApi/assets/108396649/d5949f36-85a1-4cc1-85fb-8af6f45b673d)
 
 ### Flights
 
@@ -86,7 +86,7 @@ The schema for the "Flights" table includes the following fields:
 - **`price`:** The price of the flight.
 - **`seat_capacity`:** The total seat capacity of the flight.
 
-![Flights Table Schema](<insert link to flights table schema image>)
+![Flights Table Schema](https://github.com/atakandgn/AirlineSystemApi/assets/108396649/bec2f059-00a6-4679-95a8-3230ae8fa7ac)
 
 Feel free to explore the code, contribute, and provide feedback. Thank you for checking out this Airline API project!
 
