@@ -4,7 +4,7 @@ const sql = require('mssql');
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const {sequelize, initializeSequelize} = require("./helpers/sequelize");
-const {client, flights} = require("./helpers/sequelizemodels");
+const {clients, flights} = require("./helpers/sequelizemodels");
 const {Op, literal} = require("sequelize");
 const cors = require('cors');
 const Joi = require('joi');
@@ -17,7 +17,7 @@ const path = require('path');
 
 require('dotenv').config();
 const app = express();
-const port =  3000;
+const port = 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -117,6 +117,7 @@ app.get('/', (req, res) => {
             height: 100vh;
             margin: 0;
             place-items: center;
+            background: #333333;
         }
     `;
 
@@ -156,16 +157,23 @@ const swaggerOptions = {
     definition: {
         openapi: '3.0.0',
         info: {
-            title: 'Airline API',
+            title: 'Airline System API',
             version: '1.0.0',
             description: 'API for an Airline Company',
+            contact: {
+                name: 'Atakan Doğan',
+                email: 'atakandogan.info@gmail.com',
+                url: 'https://github.com/atakandgn/AirlineSystemApi'
+            },
         },
     },
     apis: ['app.js'],
 };
 
+
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 
 // Authentication Middleware
 const authenticateUser = (req, res, next) => {
@@ -183,14 +191,21 @@ const authenticateUser = (req, res, next) => {
         console.error('Authentication Error:', error);
         return res.status(401).send('Authentication failed. Invalid token.');
     }
-};
-
+}
+/**
+ * @swagger
+ * tags:
+ *   name: Non-Auth Endpoints
+ *   description: Endpoints that do not require authentication
+ */
+// Login Endpoint Swagger Documentation
 /**
  * @swagger
  * /login:
  *   post:
- *     summary: Login
- *     description: Authenticate user and generate JWT token
+ *     summary: User Login
+ *     description: Authenticate a user and generate a JWT token
+ *     tags: [Non-Auth Endpoints]
  *     requestBody:
  *       content:
  *         application/json:
@@ -207,7 +222,7 @@ const authenticateUser = (req, res, next) => {
  *                 example: secretPassword
  *     responses:
  *       200:
- *         description: Successful login
+ *         description: Login successful
  *         content:
  *           application/json:
  *             schema:
@@ -215,11 +230,12 @@ const authenticateUser = (req, res, next) => {
  *               properties:
  *                 token:
  *                   type: string
- *                   description: JWT token for authentication
  *       400:
  *         description: Bad Request
  *       401:
  *         description: Unauthorized
+ *       500:
+ *         description: Internal Server Error
  */
 // Login endpoint
 app.post('/login', async (req, res) => {
@@ -235,22 +251,36 @@ app.post('/login', async (req, res) => {
 
         const {username, password} = value;
         const sequelize = await initializeSequelize();
-        const userModel = sequelize.define("client", client, {
+        const userModel = sequelize.define("clients", clients, {
             timestamps: false,
             freezeTableName: true,
         });
 
         const user = await userModel.findOne({
+            attributes: ['id', 'username', 'name', 'surname', 'password'],
             where: {
                 username
             }
         });
-
-        if (!user || !bcrypt.compareSync(password, user.password)) {
-            return res.status(401).send('Authentication failed. Invalid username or password.');
+        if (!user) {
+            return res.status(401).send('Login failed. User not found!');
         }
 
-        const token = jwt.sign({username: user.username, password: user.password}, process.env.JWT_SECRET_KEY);
+        if (user.username !== username) {
+            return res.status(401).send('Login failed. Invalid username!');
+        }
+
+        if (!await bcrypt.compare(password, user.password)) {
+            return res.status(401).send('Login failed. Invalid password!');
+        }
+        const tokenPayload = {
+            id: user.id,
+            username: user.username,
+            name: user.name,
+            surname: user.surname,
+            password: user.password
+        };
+        const token = jwt.sign(tokenPayload, process.env.JWT_SECRET_KEY);
 
         return res.status(200).json({token});
     } catch (error) {
@@ -259,13 +289,16 @@ app.post('/login', async (req, res) => {
     }
 });
 
+// Register Swagger Documentation
 /**
  * @swagger
  * /register:
  *   post:
- *     summary: Register
- *     description: Create a new user account
+ *     summary: Register a new user
+ *     tags: [Non-Auth Endpoints]
  *     requestBody:
+ *       description: User registration data
+ *       required: true
  *       content:
  *         application/json:
  *           schema:
@@ -273,47 +306,45 @@ app.post('/login', async (req, res) => {
  *             properties:
  *               username:
  *                 type: string
- *                 required: true
- *                 description: Alphanumeric, 3-30 characters long
+ *                 minLength: 3
+ *                 maxLength: 30
+ *                 pattern: '^[a-zA-Z0-9]+$'
  *                 example: atakandogan
  *               name:
  *                 type: string
- *                 required: true
  *                 example: Atakan
  *               surname:
  *                 type: string
- *                 required: true
  *                 example: Doğan
  *               email:
  *                 type: string
  *                 format: email
- *                 required: true
- *                 example: atakan@example.com
+ *                 example: atakandogan@example.com
  *               phone:
  *                 type: string
- *                 required: true
- *                 example: +1234567890
+ *                 example: 05321234567
  *               password:
  *                 type: string
- *                 required: true
- *                 description: Minimum 6 characters long
- *                 example: secretPassword
+ *                 minLength: 6
+ *                 example: secret123
  *     responses:
- *       201:
+ *       '201':
  *         description: User created successfully
- *       400:
- *         description: Bad Request
+ *       '400':
+ *         description: Validation error or duplicate username/email/phone
+ *       '500':
+ *         description: Internal server error during registration
  */
 // Register endpoint
 app.post('/register', async (req, res) => {
     try {
         const {error, value} = Joi.object({
-            username: Joi.string().alphanum().min(3).max(30).required(), // Alphanumeric, 3-30 karakter uzunluğunda
+            username: Joi.string().alphanum().min(3).max(30).required(),
             name: Joi.string().required(),
             surname: Joi.string().required(),
             email: Joi.string().email().required(),
             phone: Joi.string().required(),
-            password: Joi.string().min(6).required(), // Minimum 6 karakter uzunluğunda şifre
+            password: Joi.string().min(6).required(),
         }).validate(req.body);
 
         if (error) {
@@ -322,37 +353,68 @@ app.post('/register', async (req, res) => {
 
         const {username, name, surname, email, phone, password} = value;
 
-        // Şifreyi bcrypt kullanarak hashleme
+        // Hash the password using bcrypt
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const sequelize = await initializeSequelize();
-        const userModel = sequelize.define("client", client, {
+        const userModel = sequelize.define('clients', clients, {
             timestamps: false,
             freezeTableName: true,
         });
-        // Kullanıcıyı veritabanına ekleme
+
+        // Check if the username, email, or phone already exists
+        const existingUser = await userModel.findOne({
+            where: {
+                [Op.or]: [
+                    {username},
+                    {email},
+                    {phone},
+                ],
+            },
+        });
+
+        if (existingUser) {
+            if (existingUser.username === username) {
+                return res.status(400).send('Error: Username already exists.');
+            }
+            if (existingUser.email === email) {
+                return res.status(400).send('Error: Email already exists.');
+            }
+            if (existingUser.phone === phone) {
+                return res.status(400).send('Error: Phone already exists.');
+            }
+        }
+
+        // Create a new user
         const newUser = await userModel.create({
             username,
             name,
             surname,
             email,
             phone,
-            password: hashedPassword, // Hashlenmiş şifreyi kaydetme
+            password: hashedPassword,
         });
+
+        if (!newUser) {
+            return res.status(500).send('Registration error occurred. Please try again.');
+        }
 
         return res.status(201).send('User created successfully.');
     } catch (error) {
         console.error('Error:', error);
-        return res.status(400).send('Invalid JSON format or registration error');
+        return res.status(500).send('Internal server error during registration.');
     }
 });
 
+// Query Ticket Swagger Documentation
 /**
  * @swagger
  * /query-ticket:
  *   post:
- *     summary: Query ticket
+ *     summary: Query Ticket
  *     description: Query with date, from, to, and number of people
+ *     tags:
+ *       - Non-Auth Endpoints
  *     requestBody:
  *       content:
  *         application/json:
@@ -375,9 +437,11 @@ app.post('/register', async (req, res) => {
  *               page:
  *                 type: integer
  *                 example: 1
+ *                 nullable: true
  *               perPage:
  *                 type: integer
  *                 example: 2
+ *                 nullable: true
  *     responses:
  *       200:
  *         description: List of flights
@@ -386,7 +450,7 @@ app.post('/register', async (req, res) => {
  *       404:
  *         description: No matching flights found or numOfPeople exceeds seat capacity
  */
-// Query Ticket endpoint
+// Query Ticket Endpoint
 app.post('/query-ticket', async (req, res) => {
     try {
         const {error, value} = Joi.object({
@@ -394,23 +458,28 @@ app.post('/query-ticket', async (req, res) => {
             from: Joi.string().allow('', null),
             to: Joi.string().allow('', null),
             numOfPeople: Joi.number().integer().min(1),
-            page: Joi.number().integer().min(1),
-            perPage: Joi.number().integer().min(1).max(10),
+            page: Joi.number().integer().allow('', null).min(1),
+            perPage: Joi.number().integer().allow('', null).min(1).max(10),
         }).validate(req.body);
 
         if (error) {
             return res.status(400).send(`Validation Error: ${error.details[0].message}`);
         }
 
-        const {date, from, to, numOfPeople, page = 1, perPage = 5} = value;
+        const {date, from, to, numOfPeople, page, perPage} = value;
 
         if (!date && !from && !to && !numOfPeople) {
             return res.status(400).send('At least one of date, from, to, or numOfPeople must be provided');
         }
-        if (page < 1) {
+        const defaultPage = 1;
+        const defaultPerPage = 5;
+        const currentPage = page || defaultPage;
+        const itemsPerPage = perPage || defaultPerPage;
+
+        if (currentPage < 1) {
             return res.status(400).send('page must be greater than or equal to 1');
         }
-        if (perPage < 1 || perPage > 10) {
+        if (itemsPerPage < 1 || itemsPerPage > 10) {
             return res.status(400).send('perPage must be between 1 and 10');
         }
 
@@ -439,41 +508,50 @@ app.post('/query-ticket', async (req, res) => {
                 [Op.gte]: numOfPeople,
             };
         }
-        if (date && from && to) {
-            whereObj = literal(`CONCAT(departure_location, destination_location) = '${from}${to}' AND date = '${date}'`);
-        }
-
         const {count, rows} = await flightModel.findAndCountAll({
             attributes: ['flight_id', 'date', 'price'],
             where: whereObj,
-            offset: (page - 1) * perPage,
-            limit: perPage,
+            limit: itemsPerPage,
+            offset: (currentPage - 1) * itemsPerPage,
         });
 
         if (count === 0) {
             return res.status(404).send('No matching flights found.');
         }
-        if (numOfPeople > rows.seat_capacity) {
+        const invalidFlights = rows.filter(row => numOfPeople > row.seat_capacity);
+        if (invalidFlights.length > 0) {
             return res.status(400).send('numOfPeople exceeds seat capacity.');
         }
-        rows.map((row) => {
-            row.dataValues.totalPrice = row.dataValues.price * (numOfPeople || 1);
-            return row;
-        });
 
-        return res.send({data: rows, countOfData: count, totalPages: Math.ceil(count / perPage), currentPage: page});
+        rows.forEach(row => {
+            row.dataValues.totalPrice = row.dataValues.price * (numOfPeople || 1);
+        });
+        return res.send({
+            data: rows,
+            countOfData: count,
+            totalPages: Math.ceil(count / itemsPerPage),
+            currentPage: currentPage
+        });
     } catch (error) {
         console.error('Error:', error);
         return res.status(400).send('Invalid JSON format or query error');
     }
 });
 
+
+/**
+ * @swagger
+ * tags:
+ *   name: Auth Endpoints
+ *   description: Endpoints that require authentication
+ */
 /**
  * @swagger
  * /buy-ticket:
  *   post:
- *     summary: Buy ticket
+ *     summary: Buy Ticket
  *     description: Perform a buy transaction using date, from, to, and passenger name
+ *     tags: [Auth Endpoints]
  *     requestBody:
  *       content:
  *         application/json:
@@ -490,12 +568,6 @@ app.post('/query-ticket', async (req, res) => {
  *               to:
  *                 type: string
  *                 example: "JFK"
- *               name:
- *                 type: string
- *                 example: "Atakan"
- *               surname:
- *                 type: string
- *                 example: "Doğan"
  *               numOfPeople:
  *                 type: number
  *                 example: 1
@@ -503,13 +575,15 @@ app.post('/query-ticket', async (req, res) => {
  *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Status
+ *         description: Ticket purchase successful
  *       400:
  *         description: Bad Request
  *       401:
  *         description: Unauthorized
  *       404:
  *         description: No available flights for the specified criteria
+ *       500:
+ *         description: Internal Server Error
  */
 /**
  * @swagger
@@ -526,20 +600,23 @@ app.post('/query-ticket', async (req, res) => {
 // Buy Ticket endpoint
 app.post('/buy-ticket', authenticateUser, async (req, res) => {
     try {
+        if (!req.user) {
+            return res.status(401).send('Unauthorized user.');
+        }
         const {error, value} = Joi.object({
             date: Joi.string().required(),
             from: Joi.string().required(),
             to: Joi.string().required(),
-            name: Joi.string().required(),
-            surname: Joi.string().required(),
-            numOfPeople: Joi.number().required().integer().min(1)
+            numOfPeople: Joi.number().required().integer().min(1),
         }).validate(req.body);
 
         if (error) {
             return res.status(400).send(`Validation Error: ${error.details[0].message}`);
         }
 
-        const {date, from, to, name, surname, numOfPeople} = value;
+        const {date, from, to, numOfPeople} = value;
+        const {name, surname} = req.user;
+
         const sequelize = await initializeSequelize();
         const flightsModel = sequelize.define("flights", flights, {
             timestamps: false,
@@ -572,17 +649,21 @@ app.post('/buy-ticket', authenticateUser, async (req, res) => {
 
             if (!flight) {
                 await transaction.rollback();
-                return res.status(404).send('No matching flight found ');
+                return res.status(404).send('No matching flight found! Please try another flight.');
             }
             if (flight.seat_capacity < numOfPeople) {
                 await transaction.rollback();
                 return res.status(404).send('Not enough seats available');
             }
-
+            if (numOfPeople > flight.seat_capacity) {
+                await transaction.rollback();
+                return res.status(400).send('numOfPeople exceeds seat capacity.');
+            }
             flight.seat_capacity -= numOfPeople;
             await flight.save({transaction});
             await transaction.commit();
 
+            console.log('Authenticated user information:', req.user);
 
             return res.status(200).send(
                 "Ticket purchase successfully. " +
@@ -596,8 +677,6 @@ app.post('/buy-ticket', authenticateUser, async (req, res) => {
                 "Total Price: " + flight.price * numOfPeople + " - " +
                 "Single Ticket Price: " + flight.price
             );
-
-
         } catch (error) {
             console.error('Transaction Error:', error);
             await transaction.rollback();

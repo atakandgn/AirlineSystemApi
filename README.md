@@ -55,73 +55,137 @@ The data model is implemented using Sequelize and assumes the usage of a relatio
 
 - Please refer to the Swagger documentation for detailed information on each endpoint.
 
+## Live Project
+
+The live project is deployed on [RENDER](https://render.com/). You can access it [here](https://airlinesystemapi.onrender.com).
+
+## Database Schema
+
+### Clients
+
+The schema for the "Clients" table includes the following fields:
+
+- **`id`:** Unique identifier for the client.
+- **`name`:** The first name of the client.
+- **`surname`:** The last name of the client.
+- **`username`:** The username associated with the client account (unique).
+- **`email`:** The email address associated with the client account (unique).
+- **`phone`:** The phone number associated with the client account.
+- **`password`:** The hashed password for the client account.
+
+![Clients Table Schema](<insert link to clients table schema image>)
+
+### Flights
+
+The schema for the "Flights" table includes the following fields:
+
+- **`flight_id`:** Unique identifier for each flight.
+- **`departure_location`:** The departure location for the flight.
+- **`destination_location`:** The destination location for the flight.
+- **`date`:** The date of the flight.
+- **`price`:** The price of the flight.
+- **`seat_capacity`:** The total seat capacity of the flight.
+
+![Flights Table Schema](<insert link to flights table schema image>)
+
 Feel free to explore the code, contribute, and provide feedback. Thank you for checking out this Airline API project!
 
 ## Communication
-For communication: reach out to atakandogan.info@gmail.com or [LinkedIn](https://www.linkedin.com/in/atakandoan/) 
+For communication: reach out to atakandogan.info@gmail.com or [LinkedIn](https://www.linkedin.com/in/atakandoan/)
 
 ********************************************************************************************************************************************************
 
 # Havayolu API Projesi
 
-Bu depo, hayali bir havayolu şirketi için geliştirilen bir API projesinin kaynak kodlarını içerir. Proje, müşterilerin havayolu şirketi ile bilet işlemleri gerçekleştirmelerini sağlayan web hizmetlerini sunar.
+Bu depo, hayali bir havayolu şirketi için geliştirilen bir API projesinin kaynak kodunu içermektedir. Proje, müşterilerin havayolu şirketi ile bilet işlemleri gerçekleştirmelerini sağlayan web hizmetleri sunmaktadır.
 
 ## Proje Genel Bakış
 
-API projesi aşağıdaki özellikleri içerir:
+API projesi aşağıdaki özellikleri içermektedir:
 
 - **Bilet Sorgula:** Müşteriler, tarih, kalkış yeri, varış yeri ve kişi sayısına göre uygun uçuşları sorgulayabilirler.
 
-- **Bilet Satın Al:** Müşteriler, tarih, kalkış yeri, varış yeri, yolcu adı ve kişi sayısı kullanarak bilet satın alma işlemi gerçekleştirebilirler.
+- **Bilet Satın Al:** Müşteriler, tarih, kalkış yeri, varış yeri, yolcu adı ve kişi sayısını kullanarak bilet satın alma işlemi gerçekleştirebilirler.
 
 ## Kullanılan Teknolojiler
 
 - **Node.js ve Express:** Sunucu, Node.js ve Express çerçevesi kullanılarak oluşturulmuştur.
 
-- **Swagger:** Swagger, API belgelerini sağlamak için entegre edilmiştir. Swagger UI'ye `/api-docs` yolundan erişebilirsiniz.
+- **Swagger:** Swagger, API belgelerini sağlamak amacıyla entegre edilmiştir. Swagger UI'ye `/api-docs` endpoint'i üzerinden erişebilirsiniz.
 
-- **Sequelize:** Sequelize, veritabanı ile etkileşim için kullanılan ORM (Object-Relational Mapping) aracıdır.
+- **Sequelize:** Veritabanı ile etkileşim için ORM (Object-Relational Mapping) aracı olarak Sequelize kullanılmıştır.
 
-- **JWT (JSON Web Token):** Kimlik doğrulama, JWT kullanılarak uygulanmıştır. Müşterilerin yetkili uç noktalarda geçerli bir JWT tokenını istek başlığında bulundurmaları gerekmektedir.
+- **JWT (JSON Web Token):** Kimlik doğrulama, JWT kullanılarak uygulanmıştır. Yetkilendirilmiş endpoint'ler için geçerli bir JWT token'ı istemcilerin isteği başlığında bulunmalıdır.
 
-- **Bcrypt:** Şifreler, veritabanına saklanmadan önce güvenli bir şekilde Bcrypt kullanılarak karmaşalandırılır.
+- **Bcrypt:** Şifreler, veritabanında depolanmadan önce güvenli bir şekilde hashlenmiştir.
 
 ## Geliştirme Ortamı
 
-Proje, Node.js çalışma zamanı kullanılarak geliştirilmiştir ve Node.js yüklü olan herhangi bir makinede yerel olarak çalıştırılabilir. Gerekli çevresel değişkenleri, sağlanan `.env.example` dosyasına dayalı olarak bir `.env` dosyası oluşturarak ayarlamayı unutmayın.
+Proje, Node.js çalışma zamanı kullanılarak geliştirilmiştir ve Node.js yüklü olan herhangi bir makinede yerel olarak çalıştırılabilir. Gerekli çevresel değişkenleri oluşturmak için `.env.example` dosyasını temel alarak bir `.env` dosyası oluşturmayı unutmayın.
 
 ## Veritabanı
 
-Veri modeli Sequelize kullanılarak uygulanmış olup, ilişkisel bir veritabanının kullanımını varsayar. Şu anda, kod, herhangi bir bulut sağlayıcısından gelen bir veritabanı hizmetiyle çalışmak üzere yapılandırılmış durumda, tercihen Azure.
+Veri modeli, Sequelize kullanılarak uygulanmış olup ilişkisel bir veritabanının kullanımını varsayar. Şu anda, kod, herhangi bir bulut sağlayıcısından gelen bir veritabanı servisiyle çalışmak üzere yapılandırılmıştır, tercihen Azure.
 
 ## Nasıl Çalıştırılır
 
 1. Bağımlılıkları yükleyin: `npm install`
-2. Veritabanı bağlantısını ve çevresel değişkenleri içeren bir `.env` dosyası oluşturun.
+2. Veritabanı bağlantısını ve çevresel değişkenleri `.env` dosyasında yapılandırın.
 3. Sunucuyu çalıştırın: `npm start`
 4. API'ye `http://localhost:3000` adresinden erişin
 
-## Endpointler
+## Endpoints
 
-- **GET `/`:** API hakkında hoş geldiniz mesajı ve bilgi sağlayan kök uç nokta.
+- **GET `/`:** API hakkında bir karşılama mesajı ve bilgi sağlayan ana endpoint.
 
-- **POST `/login`:** Kullanıcı kimliği doğrulama için uç nokta. Geçerli bir kullanıcı adı ve şifre gerektirir.
+- **POST `/login`:** Kullanıcı kimlik doğrulama için endpoint. Geçerli bir kullanıcı adı ve şifre gerektirir.
 
-- **POST `/register`:** Kullanıcı kaydı için uç nokta. Yeni bir kullanıcı hesabı oluşturur.
+- **POST `/register`:** Kullanıcı kaydı için endpoint. Yeni bir kullanıcı hesabı oluşturur.
 
-- **POST `/query-ticket`:** Belirtilen kriterlere göre uygun uçuşları sorgulamak için uç nokta.
+- **POST `/query-ticket`:** Belirli kriterlere göre uygun uçuşları sorgulamak için endpoint.
 
-- **POST `/buy-ticket`:** Bilet satın alma için uç nokta. Kimlik doğrulama gerektirir ve başarılı işlem sonrasında kullanılabilir koltukları düşer.
+- **POST `/buy-ticket`:** Bilet satın almak için endpoint. Kimlik doğrulama gerektirir ve başarılı işlem sonrasında mevcut koltukları düşer.
 
 ## Ek Notlar
 
-- Proje, stil için SCSS kullanarak temel bir ön uç öğesi içerir. Hoş geldiniz mesajına erişmek için kök URL'yi ziyaret edin.
+- Proje, stil için SCSS kullanarak temel bir ön yüz öğesi içermektedir. Ana URL'yi ziyaret ederek karşılama mesajına erişebilirsiniz.
 
-- Lütfen her uç nokta hakkında detaylı bilgi için Swagger belgelerine başvurun.
+- Lütfen her endpoint hakkında detaylı bilgi için Swagger belgelerine başvurun.
 
+## Canlı Proje
+
+Canlı proje [RENDER](https://render.com/) üzerinde dağıtılmıştır. [Buradan](https://airlinesystemapi.onrender.com) erişebilirsiniz.
+
+## Veritabanı Şeması
+
+### Clients
+
+"Clients" tablosunun şeması aşağıdaki alanları içermektedir:
+
+- **`id`:** Müşteri için benzersiz tanımlayıcı.
+- **`name`:** Müşterinin adı.
+- **`surname`:** Müşterinin soyadı.
+- **`username`:** Müşteri hesabı ile ilişkilendirilmiş kullanıcı adı (benzersiz).
+- **`email`:** Müşteri hesabı ile ilişkilendirilmiş e-posta adresi (benzersiz).
+- **`phone`:** Müşteri hesabı ile ilişkilendirilmiş telefon numarası.
+- **`password`:** Müşteri hesabı için hashlenmiş şifre.
+
+![Clients Tablo Şeması](<insert link to clients table schema image>)
+
+### Flights
+
+"Flights" tablosunun şeması aşağıdaki alanları içermektedir:
+
+- **`flight_id`:** Her uçuş için benzersiz tanımlayıcı.
+- **`departure_location`:** Uçuşun kalkış yeri.
+- **`destination_location`:** Uçuşun varış yeri.
+- **`date`:** Uçuşun tarihi.
+- **`price`:** Uçuşun fiyatı.
+- **`seat_capacity`:** Uçuşun toplam koltuk kapasitesi.
+
+![Flights Tablo Şeması](<insert link to flights table schema image>)
+
+Kodu keşfetmek, katkıda bulunmak ve geri bildirimde bulunmak için özgürsünüz. Bu Havayolu API projesini incelediğiniz için teşekkür ederiz!
 
 ## İletişim
-İletişim için: atakandogan.info@gmail.com veya [LinkedIn](https://www.linkedin.com/in/atakandoan/) adresinden ulaşabilirsiniz.
-
-Proje hakkında keşfe çıkın, katkıda bulunun ve geri bildirim sağlayın. Bu Havayolu API projesini incelediğiniz için teşekkür ederiz!
-
+İletişim için: atakandogan.info@gmail.com veya [LinkedIn](https://www.linkedin.com/in/atakandoan/)
