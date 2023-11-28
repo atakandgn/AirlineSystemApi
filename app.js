@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
     // SCSS code
     const scssCode = `
             .content-item {
-                background: url(/bannertkn.png) !important;
+                background: url(/bannertkn.png) no-repeat center center ;
                 background-size: cover;
                 background-position: center;
                 height: 300px;
@@ -43,6 +43,13 @@ app.get('/', (req, res) => {
                 overflow: hidden;
                 position: relative;
                 width: 400px;
+                
+                &:hover {
+                box-shadow: rgb(221, 189, 59) 0px 30px 90px -20px;
+                transition: all 0.5s ease-out;
+                duration: 0.5s;
+                }
+                
                 .overlay {
                     border-bottom: 100px solid #e8c63d;
                     border-left: 100px solid transparent;
@@ -54,6 +61,7 @@ app.get('/', (req, res) => {
                     text-indent: -9999px;
                     transition: all 0.5s ease-out;
                     width: 0;
+                    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
                 }
                 &:hover .overlay {
                     border-bottom: 800px solid #e8c63d;
