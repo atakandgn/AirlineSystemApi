@@ -55,10 +55,11 @@ The data model is implemented using Sequelize and assumes the usage of a relatio
 
 - Please refer to the Swagger documentation for detailed information on each endpoint.
 
-## Live Project
+## Live Project and Video Presentation of Project
 
-The live project is deployed on [RENDER](https://render.com/). You can access it [here](https://airlinesystemapi.onrender.com).
+- The live project is deployed on [RENDER](https://render.com/). You can access it [here](https://airlinesystemapi.onrender.com).
 
+- The video presentation of the proejct [click]([https://airlinesystemapi.onrender.com](https://stuyasaredu-my.sharepoint.com/:f:/g/personal/19070006045_stu_yasar_edu_tr/EgMjb5uY4FBFut2d2FDvXfYB8AX-8_JiXLxSkLkm67FRPA?e=bFw3VF)) for access.
 ## Database Schema
 
 ### Clients
@@ -97,10 +98,12 @@ Below is the Entity-Relationship (ER) diagram representing the Airline System AP
 
 Feel free to explore the code, contribute, and provide feedback. Thank you for checking out this Airline API project!
 
+
 ## Communication
 For communication: reach out to atakandogan.info@gmail.com or [LinkedIn](https://www.linkedin.com/in/atakandoan/)
 
-***************************************************************************************************************************************************************************************
+
+******************************************************************************************************************************************************************************************************
 
 # Havayolu API Projesi
 
@@ -159,9 +162,12 @@ Veri modeli, Sequelize kullanılarak uygulanmış olup ilişkisel bir veritaban�
 
 - Lütfen her endpoint hakkında detaylı bilgi için Swagger belgelerine başvurun.
 
-## Canlı Proje
+## Canlı Proje & Projenin videolu anlatımı
 
-Canlı proje [RENDER](https://render.com/) üzerinde dağıtılmıştır. [Buradan](https://airlinesystemapi.onrender.com) erişebilirsiniz.
+- Canlı proje [RENDER](https://render.com/) üzerinde dağıtılmıştır. [Buradan](https://airlinesystemapi.onrender.com) erişebilirsiniz.
+
+- Projenin videolu anlatımı için [tıkayın]([https://airlinesystemapi.onrender.com](https://stuyasaredu-my.sharepoint.com/:f:/g/personal/19070006045_stu_yasar_edu_tr/EgMjb5uY4FBFut2d2FDvXfYB8AX-8_JiXLxSkLkm67FRPA?e=bFw3VF)).
+
 
 ## Veritabanı Şeması
 
