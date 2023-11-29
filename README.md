@@ -59,7 +59,8 @@ The data model is implemented using Sequelize and assumes the usage of a relatio
 
 - The live project is deployed on [RENDER](https://render.com/). You can access it [here](https://airlinesystemapi.onrender.com).
 
-- The video presentation of the proejct [click]([https://airlinesystemapi.onrender.com](https://stuyasaredu-my.sharepoint.com/:f:/g/personal/19070006045_stu_yasar_edu_tr/EgMjb5uY4FBFut2d2FDvXfYB8AX-8_JiXLxSkLkm67FRPA?e=bFw3VF)) for access.
+- The video presentation of the proejct [click](https://stuyasaredu-my.sharepoint.com/:f:/g/personal/19070006045_stu_yasar_edu_tr/EgMjb5uY4FBFut2d2FDvXfYB8AX-8_JiXLxSkLkm67FRPA?e=vvlD8y) for access.
+- 
 ## Database Schema
 
 ### Clients
@@ -166,7 +167,8 @@ Veri modeli, Sequelize kullanılarak uygulanmış olup ilişkisel bir veritaban�
 
 - Canlı proje [RENDER](https://render.com/) üzerinde dağıtılmıştır. [Buradan](https://airlinesystemapi.onrender.com) erişebilirsiniz.
 
-- Projenin videolu anlatımı için [tıkayın]([https://airlinesystemapi.onrender.com](https://stuyasaredu-my.sharepoint.com/:f:/g/personal/19070006045_stu_yasar_edu_tr/EgMjb5uY4FBFut2d2FDvXfYB8AX-8_JiXLxSkLkm67FRPA?e=bFw3VF)).
+- Projenin videolu anlatımı için [tıklayın](https://stuyasaredu-my.sharepoint.com/:f:/g/personal/19070006045_stu_yasar_edu_tr/EgMjb5uY4FBFut2d2FDvXfYB8AX-8_JiXLxSkLkm67FRPA?e=vvlD8y) .
+
 
 
 ## Veritabanı Şeması
