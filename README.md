@@ -55,12 +55,18 @@ The data model is implemented using Sequelize and assumes the usage of a relatio
 
 - Please refer to the Swagger documentation for detailed information on each endpoint.
 
-## Live Project and Video Presentation of Project
+## Live Project and Video Presentation of the Project
 
-- The live project is deployed on [RENDER](https://render.com/). You can access it [here](https://airlinesystemapi.onrender.com).
+### Live Project Deployment
 
-- The video presentation of the proejct [click](https://stuyasaredu-my.sharepoint.com/:f:/g/personal/19070006045_stu_yasar_edu_tr/EgMjb5uY4FBFut2d2FDvXfYB8AX-8_JiXLxSkLkm67FRPA?e=vvlD8y) for access.
-- 
+The live version of our project is deployed on [RENDER](https://render.com/). You can access it [here](https://airlinesystemapi.onrender.com).
+
+### Video Presentation
+
+We have created a detailed video presentation of our project. To watch the presentation, click [here](https://stuyasaredu-my.sharepoint.com/:f:/g/personal/19070006045_stu_yasar_edu_tr/EgMjb5uY4FBFut2d2FDvXfYB8AX-8_JiXLxSkLkm67FRPA?e=vvlD8y).
+
+
+
 ## Database Schema
 
 ### Clients
@@ -163,12 +169,15 @@ Veri modeli, Sequelize kullanılarak uygulanmış olup ilişkisel bir veritaban�
 
 - Lütfen her endpoint hakkında detaylı bilgi için Swagger belgelerine başvurun.
 
-## Canlı Proje & Projenin videolu anlatımı
+## Canlı Proje ve Proje Video Sunumu
 
-- Canlı proje [RENDER](https://render.com/) üzerinde dağıtılmıştır. [Buradan](https://airlinesystemapi.onrender.com) erişebilirsiniz.
+### Canlı Proje Dağıtımı
 
-- Projenin videolu anlatımı için [tıklayın](https://stuyasaredu-my.sharepoint.com/:f:/g/personal/19070006045_stu_yasar_edu_tr/EgMjb5uY4FBFut2d2FDvXfYB8AX-8_JiXLxSkLkm67FRPA?e=vvlD8y) .
+- Projemin canlı versiyonu [RENDER](https://render.com/) üzerinde dağıtılmıştır. Projeye [buradan](https://airlinesystemapi.onrender.com) erişebilirsiniz.
 
+### Video Sunumu
+
+- Projemin detaylı bir video sunumunu hazırladım. Sunumu izlemek için lütfen [buraya](https://stuyasaredu-my.sharepoint.com/:f:/g/personal/19070006045_stu_yasar_edu_tr/EgMjb5uY4FBFut2d2FDvXfYB8AX-8_JiXLxSkLkm67FRPA?e=vvlD8y) tıklayın.
 
 
 ## Veritabanı Şeması
