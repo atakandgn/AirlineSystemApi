@@ -61,10 +61,6 @@ The data model is implemented using Sequelize and assumes the usage of a relatio
 
 The live version of my project is deployed on [RENDER](https://render.com/). You can access it [here](https://airlinesystemapi.onrender.com).
 
-### Video Presentation
-
-- I have created a detailed video presentation of my project. To watch the presentation, click [here](https://stuyasaredu-my.sharepoint.com/:f:/g/personal/19070006045_stu_yasar_edu_tr/EgMjb5uY4FBFut2d2FDvXfYB8AX-8_JiXLxSkLkm67FRPA?e=vvlD8y).
-  
 
 ## Database Schema
 
