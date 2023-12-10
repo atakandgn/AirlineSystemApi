@@ -170,9 +170,6 @@ Veri modeli, Sequelize kullanılarak uygulanmış olup ilişkisel bir veritaban�
 
 - Projemin canlı versiyonu [RENDER](https://render.com/) üzerinde dağıtılmıştır. Projeye [buradan](https://airlinesystemapi.onrender.com) erişebilirsiniz.
 
-### Video Sunumu
-
-- Projemin detaylı bir video sunumunu hazırladım. Sunumu izlemek için lütfen [buraya](https://stuyasaredu-my.sharepoint.com/:f:/g/personal/19070006045_stu_yasar_edu_tr/EgMjb5uY4FBFut2d2FDvXfYB8AX-8_JiXLxSkLkm67FRPA?e=vvlD8y) tıklayın.
 
 
 ## Veritabanı Şeması
